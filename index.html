@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html class="h-full" lang="id">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
+<title>MedCard</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link rel="stylesheet" href="tailwind-generated.css">
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#005F5E">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MedCard">
+</head>
+<body class="bg-background font-body-md text-on-surface antialiased min-h-screen selection:bg-secondary-container selection:text-on-secondary-container">
+
+  <!-- ============ SIDEBAR (DESKTOP, >=1024px) ============ -->
+  <aside class="desktop-only hidden lg:flex lg:flex-col fixed left-0 top-0 h-full w-sidebar-width bg-surface-container-low z-40 overflow-y-auto shadow-[0_1px_10px_rgba(0,0,0,0.06)]">
+    <div class="flex flex-col p-space-md gap-space-md flex-1">
+      <button class="flex items-center gap-space-sm px-space-xxs pt-space-xxs text-left" id="sidebarBrandBtn" title="Kembali ke Beranda">
+        <svg aria-hidden="true" class="h-8 w-8 shrink-0" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="mcLogoGradSidebar" gradientUnits="userSpaceOnUse" x1="4" x2="36" y1="4" y2="36">
+              <stop stop-color="#00A896"></stop>
+              <stop offset="1" stop-color="#005F5E"></stop>
+            </linearGradient>
+          </defs>
+          <rect fill="#00A896" fill-opacity="0.30" height="26" rx="8" width="26" x="10" y="10"></rect>
+          <rect fill="url(#mcLogoGradSidebar)" height="26" rx="8" width="26" x="4" y="4"></rect>
+          <rect fill="white" height="17" rx="3.2" width="8" x="15" y="10.5"></rect>
+          <rect fill="white" height="8" rx="3.2" width="17" x="8.5" y="17"></rect>
+        </svg>
+        <span class="font-headline-sm text-headline-sm text-on-surface">MedCard</span>
+      </button>
+
+      <button class="w-full flex items-center justify-center gap-space-xs px-space-md py-space-sm bg-primary hover:bg-primary-container text-on-primary hover:text-on-primary-container rounded-xl transition-colors shadow-sm font-label-lg text-label-lg" id="btnFabAddDesktop">
+        <span class="material-symbols-outlined text-[18px]">add_circle</span>
+        <span>Tambah Kartu</span>
+      </button>
+
+      <nav class="flex flex-col gap-1" id="sidebarNav">
+        <button class="nav-link flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-view="dashboard">
+          <span class="material-symbols-outlined text-[19px]">dashboard</span><span>Dashboard</span>
+        </button>
+        <button class="nav-link flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-view="search">
+          <span class="material-symbols-outlined text-[19px]">search</span><span>Cari Obat</span>
+        </button>
+        <button class="nav-link flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-view="referensi">
+          <span class="material-symbols-outlined text-[19px]">child_care</span><span>Referensi Anak</span>
+        </button>
+        <button class="nav-link flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-view="stats">
+          <span class="material-symbols-outlined text-[19px]">query_stats</span><span>Statistik</span>
+        </button>
+        <button class="nav-link flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-view="kategori">
+          <span class="material-symbols-outlined text-[19px]">category</span><span>Kategori Obat</span>
+        </button>
+        <button class="nav-link flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-view="import">
+          <span class="material-symbols-outlined text-[19px]">document_scanner</span><span>Import Foto/PDF</span>
+        </button>
+        <button class="nav-link flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-view="profil">
+          <span class="material-symbols-outlined text-[19px]">person</span><span>Profil</span>
+        </button>
+      </nav>
+
+      <div class="flex flex-col gap-space-xs pt-space-sm border-t border-outline-variant/40">
+        <div class="flex items-center justify-between px-space-xxs">
+          <span class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Deck Saya</span>
+        </div>
+        <div class="flex flex-col gap-1" id="sidebarDeckList">
+          <!-- diisi JS -->
+        </div>
+      </div>
+    </div>
+    <button class="flex items-center gap-space-sm p-space-md border-t border-outline-variant/40 hover:bg-surface-container transition-colors text-left" data-view="profil" id="sidebarProfileBtn">
+      <span class="w-9 h-9 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-lg text-label-lg shrink-0 overflow-hidden" id="sidebarAvatarInitials">?</span>
+      <div class="flex-1 min-w-0">
+        <div class="font-body-sm text-body-sm font-semibold text-on-surface truncate" id="sidebarProfileName">Atur Profil</div>
+        <div class="font-label-caps text-label-caps text-outline truncate" id="sidebarProfileTitle">Belum diisi</div>
+      </div>
+      <span class="material-symbols-outlined text-[18px] text-outline">chevron_right</span>
+    </button>
+  </aside>
+
+  <!-- ============ WRAPPER KONTEN (offset sidebar di desktop) ============ -->
+  <div class="lg:pl-sidebar-width min-h-screen flex flex-col">
+
+    <!-- ============ TOP BAR ============ -->
+    <header class="sticky top-0 z-30 bg-surface/90 backdrop-blur-xl pt-safe border-b border-outline-variant/50">
+      <div class="h-16 max-w-content-max-width lg:max-w-none mx-auto lg:mx-0 px-space-md lg:px-space-xl flex items-center justify-between gap-space-md">
+        <button class="flex items-center gap-space-xs lg:hidden text-left" id="mobileBrandBtn" title="Kembali ke Beranda">
+          <svg aria-hidden="true" class="h-8 w-8 shrink-0" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="mcLogoGradMobile" gradientUnits="userSpaceOnUse" x1="4" x2="36" y1="4" y2="36">
+                <stop stop-color="#00A896"></stop>
+                <stop offset="1" stop-color="#005F5E"></stop>
+              </linearGradient>
+            </defs>
+            <rect fill="#00A896" fill-opacity="0.30" height="26" rx="8" width="26" x="10" y="10"></rect>
+            <rect fill="url(#mcLogoGradMobile)" height="26" rx="8" width="26" x="4" y="4"></rect>
+            <rect fill="white" height="17" rx="3.2" width="8" x="15" y="10.5"></rect>
+            <rect fill="white" height="8" rx="3.2" width="17" x="8.5" y="17"></rect>
+          </svg>
+          <span class="font-headline-sm text-headline-sm text-primary tracking-tight">MedCard</span>
+        </button>
+
+        <div class="hidden lg:flex flex-1 max-w-xl relative">
+          <span class="material-symbols-outlined absolute left-space-sm top-1/2 -translate-y-1/2 text-outline text-[19px]">search</span>
+          <input class="w-full bg-surface-container-lowest text-on-surface placeholder:text-outline text-body-sm border border-outline-variant/60 rounded-xl pl-10 pr-space-md py-space-xs focus:ring-2 focus:ring-primary/40 focus:border-primary transition-shadow" id="searchInputDesktop" placeholder="Cari obat, indikasi, atau deck..." type="text">
+        </div>
+
+        <div class="flex items-center gap-space-xs">
+          <button aria-label="Profil" class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-md text-label-md lg:hidden overflow-hidden" id="btnProfileMobile">?</button>
+          <button aria-label="Bunyikan/matikan suara" class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors" id="btnMuteToggle">
+            <span class="material-symbols-outlined" id="muteToggleIcon">volume_up</span>
+          </button>
+          <button aria-label="Ubah tema" class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors" id="btnDarkToggle">
+            <span class="material-symbols-outlined" id="darkToggleIcon">dark_mode</span>
+          </button>
+          <button aria-label="Cari" class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors lg:hidden" id="btnSearchToggleMobile">
+            <span class="material-symbols-outlined">search</span>
+          </button>
+        </div>
+      </div>
+      <div class="hidden lg:hidden px-space-md pb-space-sm" id="searchBarMobile">
+        <div class="flex items-center gap-2 bg-surface-container-low rounded-xl px-space-sm py-space-xs">
+          <span class="material-symbols-outlined text-outline text-[19px]">search</span>
+          <input class="flex-1 bg-transparent border-none text-body-sm text-on-surface placeholder:text-outline" id="searchInputMobile" placeholder="Cari nama obat, indikasi, atau tag..." type="text">
+        </div>
+      </div>
+    </header>
+
+    <!-- ============ MAIN CONTENT ============ -->
+    <main class="flex-1 w-full max-w-content-max-width lg:max-w-none mx-auto lg:mx-0 px-space-md lg:px-space-2xl py-space-lg pb-32 lg:pb-space-2xl">
+
+      <!-- ================= VIEW: DASHBOARD ================= -->
+      <section class="view" id="view-dashboard">
+
+        <!-- Hero Review Widget -->
+        <section class="relative overflow-hidden rounded-2xl bg-primary text-on-primary p-space-lg lg:p-space-xl shadow-md mb-space-lg">
+          <div class="absolute -right-8 -top-8 w-44 h-44 opacity-10 pointer-events-none">
+            <svg class="w-full h-full text-on-primary" fill="none" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="100" cy="100" r="80" stroke="currentColor" stroke-dasharray="8 8" stroke-width="12"></circle>
+              <path d="M70 100H130M100 70V130" stroke="currentColor" stroke-linecap="round" stroke-width="12"></path>
+            </svg>
+          </div>
+          <div class="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-space-md">
+            <div class="space-y-space-xxs">
+              <div class="inline-flex items-center gap-space-xxs px-space-xs py-1 rounded-full bg-on-primary/15 text-on-primary-container font-label-sm text-label-sm">
+                <span class="material-symbols-outlined text-[15px]">schedule</span>
+                <span>Antrean Memori Spasi</span>
+              </div>
+              <div class="flex items-baseline gap-space-xs pt-space-xxs">
+                <span class="font-headline-lg-mobile text-headline-lg-mobile lg:font-display-lg lg:text-display-lg font-bold tracking-tight" id="heroDueCount">0 Kartu</span>
+                <span class="font-headline-sm text-headline-sm opacity-90 font-medium">Perlu Diulang</span>
+              </div>
+              <p class="font-body-sm text-body-sm opacity-80" id="heroSubtext">Belum ada kartu due hari ini.</p>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-space-xs">
+              <button class="flex items-center justify-center gap-space-xs bg-secondary-container text-on-secondary-container py-space-sm px-space-lg rounded-xl font-label-lg text-label-lg shadow-sm active:scale-[0.98] transition-transform duration-100" id="btnStartStudyHero">
+                <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+                <span>Mulai Belajar!</span>
+              </button>
+              <button class="flex items-center justify-center gap-space-xs bg-on-primary/15 text-on-primary-container py-space-sm px-space-lg rounded-xl font-label-lg text-label-lg shadow-sm active:scale-[0.98] transition-transform duration-100" id="btnQuizHero">
+                <span class="material-symbols-outlined text-[20px]">quiz</span>
+                <span>Kuis Cepat</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- KPI Grid -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-space-sm lg:gap-space-md mb-space-lg">
+          <div class="p-space-md rounded-xl bg-surface-container-low">
+            <span class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Due Hari Ini</span>
+            <div class="font-display-lg text-display-lg text-primary mt-space-xxs" id="sumDue">0</div>
+          </div>
+          <div class="p-space-md rounded-xl bg-surface-container-low">
+            <span class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Total Kartu</span>
+            <div class="font-display-lg text-display-lg text-on-surface mt-space-xxs" id="sumTotal">0</div>
+          </div>
+          <div class="p-space-md rounded-xl bg-surface-container-low">
+            <span class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Dikuasai</span>
+            <div class="font-display-lg text-display-lg text-secondary mt-space-xxs" id="sumMastered">0</div>
+          </div>
+          <div class="p-space-md rounded-xl bg-surface-container-low">
+            <span class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Kartu Baru</span>
+            <div class="font-display-lg text-display-lg text-tertiary mt-space-xxs" id="sumNew">0</div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between mb-space-sm">
+          <h2 class="font-headline-md text-headline-md text-on-surface">Deck Saya</h2>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-space-sm mb-space-lg" id="deckList"></div>
+
+        <div class="grid grid-cols-2 gap-space-sm mb-space-lg lg:hidden">
+          <button class="flex flex-col items-center gap-space-xxs p-space-md rounded-xl bg-surface-container-low" data-view="kategori">
+            <span class="material-symbols-outlined text-primary text-[22px]">category</span>
+            <span class="font-label-md text-label-md text-on-surface">Kategori Obat</span>
+          </button>
+          <button class="flex flex-col items-center gap-space-xxs p-space-md rounded-xl bg-surface-container-low" data-view="import">
+            <span class="material-symbols-outlined text-primary text-[22px]">document_scanner</span>
+            <span class="font-label-md text-label-md text-on-surface">Import Foto/PDF</span>
+          </button>
+        </div>
+
+        <div class="flex items-center justify-between mb-space-sm">
+          <h2 class="font-headline-md text-headline-md text-on-surface">Referensi Cepat</h2>
+        </div>
+        <button class="w-full flex items-center gap-space-md bg-gradient-to-br from-primary to-secondary text-on-primary rounded-2xl p-space-lg shadow-sm mb-space-lg" id="btnOpenReferensi">
+          <span class="material-symbols-outlined text-[30px]">child_care</span>
+          <div class="flex-1 text-left">
+            <strong class="font-headline-sm text-headline-sm block">Konversi Dosis Anak</strong>
+            <span class="font-body-sm text-body-sm opacity-90">Tabel puyer 3x1 &amp; cairan rumatan (Holliday-Segar)</span>
+          </div>
+          <span class="material-symbols-outlined">chevron_right</span>
+        </button>
+
+        <section class="p-space-md rounded-xl bg-surface-container-high flex items-start gap-space-sm">
+          <span class="material-symbols-outlined text-primary text-[24px] shrink-0 mt-0.5">lightbulb</span>
+          <div>
+            <h4 class="font-label-lg text-label-lg text-on-surface">Tips</h4>
+            <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">Review kartu yang berstatus "Lupa" lebih sering — kartu itu akan muncul lagi lebih cepat berkat spaced repetition.</p>
+          </div>
+        </section>
+      </section>
+
+      <!-- ================= VIEW: DETAIL DECK ================= -->
+      <section class="view hidden" id="view-deck">
+        <button class="back-btn flex items-center gap-1 text-on-surface-variant font-label-md text-label-md mb-space-sm" data-back="dashboard">
+          <span class="material-symbols-outlined text-[18px]">arrow_back</span> Kembali
+        </button>
+        <h2 class="font-headline-lg text-headline-lg text-on-surface mb-space-md" id="deckTitle">Deck</h2>
+        <div class="flex gap-space-sm mb-space-md">
+          <button class="flex-1 flex items-center justify-center gap-space-xs bg-primary text-on-primary py-space-sm rounded-xl font-label-lg text-label-lg shadow-sm" id="btnStartStudyFromDeck">
+            <span class="material-symbols-outlined text-[19px]">school</span> Mulai Belajar
+          </button>
+          <button class="flex-1 flex items-center justify-center gap-space-xs border border-primary text-primary py-space-sm rounded-xl font-label-lg text-label-lg" id="btnQuizFromDeck">
+            <span class="material-symbols-outlined text-[19px]">quiz</span> Kuis Cepat
+          </button>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-space-sm" id="cardListInDeck"></div>
+      </section>
+
+      <!-- ================= VIEW: TAMBAH / EDIT KARTU ================= -->
+      <section class="view hidden" id="view-form">
+        <button class="back-btn flex items-center gap-1 text-on-surface-variant font-label-md text-label-md mb-space-sm" data-back="dashboard">
+          <span class="material-symbols-outlined text-[18px]">arrow_back</span> Kembali
+        </button>
+        <h2 class="font-headline-lg text-headline-lg text-on-surface mb-space-md" id="formTitle">Tambah Kartu Obat</h2>
+
+        <form class="max-w-2xl" id="cardForm">
+          <input id="f_id" type="hidden">
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-space-lg">
+            <div>
+              <label class="block font-label-md text-label-md text-on-surface-variant mt-space-md mb-space-xxs">Nama Deck</label>
+              <input class="field-input w-full px-space-sm py-space-xs border border-outline-variant rounded-lg bg-surface-container-lowest focus:ring-2 focus:ring-primary/40 focus:border-primary" id="f_deck" list="deckOptions" placeholder="cth: Obat Anak, Obat IGD" required>
+              <datalist id="deckOptions"></datalist>
+            </div>
+            <div>
+              <label class="block font-label-md text-label-md text-on-surface-variant mt-space-md mb-space-xxs">Nama Obat (generik) *</label>
+              <input class="field-input w-full px-space-sm py-space-xs border border-outline-variant rounded-lg bg-surface-container-lowest focus:ring-2 focus:ring-primary/40 focus:border-primary" id="f_namaObat" placeholder="cth: Paracetamol" required>
+            </div>
+            <div>
+              <label class="block font-label-md text-label-md text-on-surface-variant mt-space-md mb-space-xxs">Nama Dagang</label>
+              <input class="field-input w-full px-space-sm py-space-xs border border-outline-variant rounded-lg bg-surface-container-lowest focus:ring-2 focus:ring-primary/40 focus:border-primary" id="f_namaDagang" placeholder="cth: Sanmol">
+            </div>
+            <div>
+              <label class="block font-label-md text-label-md text-on-surface-variant mt-space-md mb-space-xxs">Golongan</label>
+              <input class="field-input w-full px-space-sm py-space-xs border border-outline-variant rounded-lg bg-surface-container-lowest focus:ring-2 focus:ring-primary/40 focus:border-primary" id="f_golongan" placeholder="cth: Analgesik-antipiretik">
+            </div>
+            <div class="lg:col-span-2">
+              <label class="block font-label-md text-label-md text-on-surface-variant mt-space-md mb-space-xxs">Indikasi Utama</label>
+              <input class="field-input w-full px-space-sm py-space-xs border border-outline-variant rounded-lg bg-surface-container-lowest focus:ring-2 focus:ring-primary/40 focus:border-primary" id="f_indikasi" placeholder="cth: Demam, nyeri ringan-sedang">
+            </div>
+            <div>
+              <label class="block font-label-md text-label-md text-on-surface-variant mt-space-md mb-space-xxs">Dosis Dewasa</label>
+              <textarea class="field-input w-full px-space-sm py-space-xs border border-outline-variant rounded-lg bg-surface-container-lowest focus:ring-2 focus:ring-primary/40 focus:border-primary" id="f_dosisDewasa" rows="2" placeholder="cth: 500-1000 mg tiap 4-6 jam"></textarea>
+            </div>
+            <div>
+              <label class="block font-label-md text-label-md text-on-surface-variant mt-space-md mb-space-xxs">Dosis Anak</label>
+              <textarea class="field-input w-full px-space-sm py-space-xs border border-outline-variant rounded-lg bg-surface-container-lowest focus:ring-2 focus:ring-primary/40 focus:border-primary" id="f_dosisAnak" rows="2" placeholder="cth: 10-15 mg/kgBB tiap 6-8 jam"></textarea>
+            </div>
+          </div>
+
+          <details class="mt-space-lg border-t border-outline-variant/50 pt-space-sm">
+            <summary class="cursor-pointer font-label-lg text-label-lg text-primary py-space-xs">Field opsional lainnya</summary>
+
+            <label class="block font-label-md text-label-md text-on-surface-variant mt-space-md mb-space-xxs">Rute Pemberian</label>
+            <div class="flex flex-wrap gap-space-xs" id="ruteChips">
+              <button class="chip-toggle px-space-sm py-space-xxs rounded-full border border-outline-variant text-on-surface-variant font-label-md text-label-md" data-rute="Oral" type="button">Oral</button>
+              <button class="chip-toggle px-space-sm py-space-xxs rounded-full border border-outline-variant text-on-surface-variant font-label-md text-label-md" data-rute="IV" type="button">IV</button>
+              <button class="chip-toggle px-space-sm py-space-xxs rounded-full border border-outline-variant text-on-surface-variant font-label-md text-label-md" data-rute="IM" type="button">IM</button>
+              <button class="chip-toggle px-space-sm py-space-xxs rounded-full border border-outline-variant text-on-surface-variant font-label-md text-label-md" data-rute="Rektal" type="button">Rektal</button>
+              <button class="chip-toggle px-space-sm py-space-xxs rounded-full border border-outline-variant text-on-surface-variant font-label-md text-label-md" data-rute="Topikal" type="button">Topikal</button>
+            </div>
+            <input id="f_rute" type="hidden">
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-space-lg">
+              <div class="lg:col-span-2">
+                <label class="block font-label-md text-label-md text-on-surface-variant mt-space-md mb-space-xxs">Kontraindikasi / Perhatian Khusus</label>
+                <textarea class="field-input w-full px-space-sm py-space-xs border border-outline-variant rounded-lg bg-surface-container-lowest focus:ring-2 focus:ring-primary/40 focus:border-primary" id="f_kontraindikasi" rows="2"></textarea>
+              </div>
+              <div class="lg:col-span-2">
+                <label class="block font-label-md text-label-md text-on-surface-variant mt-space-md mb-space-xxs">Efek Samping Penting</label>
+                <textarea class="field-input w-full px-space-sm py-space-xs border border-outline-variant rounded-lg bg-surface-container-lowest focus:ring-2 focus:ring-primary/40 focus:border-primary" id="f_efekSamping" rows="2"></textarea>
+              </div>
+              <div class="lg:col-span-2">
+                <label class="block font-label-md text-label-md text-on-surface-variant mt-space-md mb-space-xxs">Catatan Pribadi</label>
+                <textarea class="field-input w-full px-space-sm py-space-xs border border-outline-variant rounded-lg bg-surface-container-lowest focus:ring-2 focus:ring-primary/40 focus:border-primary" id="f_catatan" rows="2"></textarea>
+              </div>
+              <div>
+                <label class="block font-label-md text-label-md text-on-surface-variant mt-space-md mb-space-xxs">Tag (pisahkan dengan koma)</label>
+                <input class="field-input w-full px-space-sm py-space-xs border border-outline-variant rounded-lg bg-surface-container-lowest focus:ring-2 focus:ring-primary/40 focus:border-primary" id="f_tag" placeholder="cth: IGD, Anak, Antibiotik">
+              </div>
+              <div>
+                <label class="block font-label-md text-label-md text-on-surface-variant mt-space-md mb-space-xxs">Sumber Referensi</label>
+                <input class="field-input w-full px-space-sm py-space-xs border border-outline-variant rounded-lg bg-surface-container-lowest focus:ring-2 focus:ring-primary/40 focus:border-primary" id="f_sumber" placeholder="cth: Buku panduan RS X">
+              </div>
+            </div>
+          </details>
+
+          <div class="flex gap-space-sm mt-space-xl">
+            <button class="flex-1 bg-primary text-on-primary py-space-sm rounded-xl font-label-lg text-label-lg shadow-sm" id="btnSaveCard" type="submit">Simpan Kartu</button>
+            <button class="hidden px-space-lg border border-error text-error rounded-xl font-label-lg text-label-lg" id="btnDeleteCard" type="button">Hapus</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- ================= VIEW: SESI BELAJAR ================= -->
+      <section class="view hidden" id="view-study">
+        <div class="flex items-center gap-space-sm mb-space-md">
+          <button class="w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant" data-back="deck">
+            <span class="material-symbols-outlined text-[19px]">close</span>
+          </button>
+          <div class="flex-1 flex items-center gap-space-sm">
+            <div class="flex-1 h-2 rounded-full bg-surface-container-highest overflow-hidden">
+              <div class="h-full bg-secondary transition-all duration-300" id="studyProgressFill" style="width:0%"></div>
+            </div>
+            <span class="font-label-md text-label-md text-on-surface-variant whitespace-nowrap" id="studyProgressText">0 / 0</span>
+          </div>
+        </div>
+
+        <div class="js-hidden flex flex-col items-center text-center gap-space-sm py-space-3xl" id="studyEmpty">
+          <span class="material-symbols-outlined text-secondary text-[48px]">celebration</span>
+          <h3 class="font-headline-md text-headline-md text-on-surface">Semua kartu sudah direview!</h3>
+          <p class="font-body-sm text-body-sm text-on-surface-variant">Tidak ada kartu yang due untuk deck ini hari ini.</p>
+          <button class="mt-space-xs bg-primary text-on-primary px-space-lg py-space-sm rounded-xl font-label-lg text-label-lg" data-back="deck">Kembali ke Deck</button>
+        </div>
+
+        <div class="flip-scene max-w-2xl mx-auto" id="studyCardWrap">
+          <div class="flip-card" id="flashcard">
+            <!-- FRONT -->
+            <div class="flip-face bg-surface-container-lowest rounded-2xl border border-outline-variant/40 shadow-md p-space-lg flex flex-col items-center justify-center text-center gap-space-sm cursor-pointer">
+              <span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary">Ingat dosisnya?</span>
+              <h1 class="font-headline-lg-mobile text-headline-lg-mobile lg:text-headline-lg lg:font-headline-lg text-on-surface uppercase tracking-tight" id="cardFrontName">-</h1>
+              <p class="font-body-md text-body-md text-primary italic font-semibold" id="cardFrontBrand"></p>
+              <div class="flex flex-wrap gap-space-xxs justify-center" id="cardFrontChips"></div>
+              <span class="mt-space-md bg-surface-container-high text-on-surface-variant px-space-md py-space-xs rounded-full font-label-md text-label-md flex items-center gap-1">
+                <span class="material-symbols-outlined text-[16px]">touch_app</span> Ketuk untuk buka jawaban
+              </span>
+            </div>
+            <!-- BACK -->
+            <div class="flip-face flip-face-back bg-surface-container-lowest rounded-2xl border border-outline-variant/40 shadow-md p-space-lg flex flex-col gap-space-sm">
+              <h2 class="font-headline-sm text-headline-sm text-on-surface" id="cardBackName">-</h2>
+              <div class="w-full h-px bg-surface-variant"></div>
+
+              <div class="bg-secondary-container/30 p-space-sm rounded-lg flex flex-col gap-space-xxs" id="rowDewasa">
+                <span class="font-label-sm text-label-sm text-on-secondary-container uppercase tracking-wider font-bold flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[16px]">person</span> Dosis Dewasa
+                </span>
+                <p class="font-dosage-display text-dosage-display text-on-surface" id="cardBackDewasa">-</p>
+              </div>
+
+              <div class="bg-tertiary-container/15 p-space-sm rounded-lg flex flex-col gap-space-xxs" id="rowAnak">
+                <span class="font-label-sm text-label-sm text-on-tertiary-fixed-variant uppercase tracking-wider font-bold flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[16px]">child_care</span> Dosis Anak
+                </span>
+                <p class="font-dosage-display text-dosage-display text-on-surface" id="cardBackAnak">-</p>
+              </div>
+
+              <p class="font-body-sm text-body-sm text-on-surface-variant" id="infoIndikasi"></p>
+              <div class="bg-error-container/60 p-space-sm rounded-lg flex items-start gap-space-xs empty:hidden" id="infoKontraindicaWrap">
+                <span class="material-symbols-outlined text-error text-[18px] shrink-0 mt-0.5">warning</span>
+                <p class="font-body-sm text-body-sm text-on-error-container" id="infoKontraindikasi"></p>
+              </div>
+              <p class="font-body-sm text-body-sm text-on-surface-variant italic" id="infoCatatan"></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="js-hidden grid grid-cols-4 gap-space-xs max-w-2xl mx-auto mt-space-lg" id="srsDock">
+          <button class="srs-btn flex flex-col items-center justify-center min-h-[58px] py-space-xs rounded-xl bg-error-container text-on-error-container shadow-sm active:scale-95 transition-all" data-rating="1">
+            <span class="font-label-sm text-label-sm opacity-80">Lupa</span>
+            <span class="font-label-lg text-label-lg font-bold">Lupa</span>
+          </button>
+          <button class="srs-btn flex flex-col items-center justify-center min-h-[58px] py-space-xs rounded-xl bg-surface-container-highest text-on-surface shadow-sm active:scale-95 transition-all" data-rating="2">
+            <span class="font-label-sm text-label-sm text-on-surface-variant">Ragu</span>
+            <span class="font-label-lg text-label-lg font-bold">Ragu</span>
+          </button>
+          <button class="srs-btn flex flex-col items-center justify-center min-h-[58px] py-space-xs rounded-xl bg-primary text-on-primary shadow-md active:scale-95 transition-all" data-rating="3">
+            <span class="font-label-sm text-label-sm opacity-80">Ingat</span>
+            <span class="font-label-lg text-label-lg font-bold">Ingat</span>
+          </button>
+          <button class="srs-btn flex flex-col items-center justify-center min-h-[58px] py-space-xs rounded-xl bg-secondary-container text-on-secondary-container shadow-sm active:scale-95 transition-all" data-rating="4">
+            <span class="font-label-sm text-label-sm opacity-80">Mudah</span>
+            <span class="font-label-lg text-label-lg font-bold">Mudah</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- ================= VIEW: KUIS CEPAT ================= -->
+      <section class="view hidden max-w-2xl" id="view-quiz">
+        <button class="back-btn flex items-center gap-1 text-on-surface-variant font-label-md text-label-md mb-space-sm" data-back="deck">
+          <span class="material-symbols-outlined text-[18px]">arrow_back</span> Kembali
+        </button>
+        <h2 class="font-headline-lg text-headline-lg text-on-surface mb-space-sm">Kuis Cepat</h2>
+        <div id="quizIntro">
+          <p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">Latihan cepat tanpa memengaruhi jadwal spaced repetition. Cocok dipakai sebelum jaga.</p>
+
+          <label class="block font-label-md text-label-md text-on-surface-variant mb-space-xxs">Mode Kuis</label>
+          <div class="grid grid-cols-2 gap-space-xs mb-space-xxs" id="quizModeChips">
+            <button class="chip-toggle is-active flex items-center gap-space-xxs px-space-sm py-space-xs rounded-xl border border-outline-variant text-on-surface-variant font-label-md text-label-md justify-center" data-mode="obat-dosis" type="button">
+              <span class="material-symbols-outlined text-[16px]">medication</span> Obat → Dosis
+            </button>
+            <button class="chip-toggle flex items-center gap-space-xxs px-space-sm py-space-xs rounded-xl border border-outline-variant text-on-surface-variant font-label-md text-label-md justify-center" data-mode="indikasi-obat" type="button">
+              <span class="material-symbols-outlined text-[16px]">stethoscope</span> Indikasi → Obat
+            </button>
+            <button class="chip-toggle flex items-center gap-space-xxs px-space-sm py-space-xs rounded-xl border border-outline-variant text-on-surface-variant font-label-md text-label-md justify-center" data-mode="benar-salah" type="button">
+              <span class="material-symbols-outlined text-[16px]">fact_check</span> Benar / Salah
+            </button>
+            <button class="chip-toggle flex items-center gap-space-xxs px-space-sm py-space-xs rounded-xl border border-outline-variant text-on-surface-variant font-label-md text-label-md justify-center" data-mode="isian" type="button">
+              <span class="material-symbols-outlined text-[16px]">edit_note</span> Isian Bebas
+            </button>
+            <button class="chip-toggle col-span-2 flex items-center gap-space-xxs px-space-sm py-space-xs rounded-xl border border-outline-variant text-on-surface-variant font-label-md text-label-md justify-center" data-mode="campuran" type="button">
+              <span class="material-symbols-outlined text-[16px]">shuffle</span> Campuran (Acak Semua Jenis)
+            </button>
+          </div>
+          <p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md" id="quizModeHint">Diberi nama obat, pilih dosis yang benar.</p>
+
+          <label class="block font-label-md text-label-md text-on-surface-variant mb-space-xxs">Jumlah soal</label>
+          <input class="field-input w-full px-space-sm py-space-xs border border-outline-variant rounded-lg bg-surface-container-lowest max-w-[160px]" id="quizCount" max="30" min="3" type="number" value="10">
+          <button class="mt-space-md w-full bg-primary text-on-primary py-space-sm rounded-xl font-label-lg text-label-lg shadow-sm" id="btnStartQuiz">Mulai Kuis</button>
+        </div>
+
+        <div class="hidden" id="quizArea">
+          <div class="flex items-center gap-space-sm mb-space-md">
+            <div class="flex-1 h-2 rounded-full bg-surface-container-highest overflow-hidden">
+              <div class="h-full bg-secondary" id="quizProgressFill" style="width:0%"></div>
+            </div>
+            <span class="font-label-md text-label-md text-on-surface-variant" id="quizProgressText">0 / 0</span>
+          </div>
+          <div class="hidden justify-center mb-space-sm" id="quizStageLabelWrap">
+            <span class="inline-flex items-center gap-space-xxs px-space-sm py-space-xxs rounded-full bg-tertiary-container/30 text-on-tertiary-fixed-variant font-label-sm text-label-sm uppercase tracking-wider" id="quizStageLabel">Tahap 1 — Mudah</span>
+          </div>
+          <h3 class="font-headline-sm text-headline-sm text-on-surface text-center mb-space-md" id="quizQuestion">Dosis untuk: -</h3>
+
+          <!-- Pilihan ganda (dipakai mode Obat→Dosis & Indikasi→Obat) -->
+          <div class="js-hidden flex flex-col gap-space-sm" id="quizOptions"></div>
+
+          <!-- Benar / Salah -->
+          <div class="js-hidden flex flex-col gap-space-md" id="quizTrueFalseArea">
+            <div class="p-space-lg rounded-xl bg-surface-container-low text-center transition-colors duration-300" id="quizStatementBox">
+              <div class="font-headline-sm text-headline-sm text-on-surface" id="quizStatementDrug">-</div>
+              <div class="font-dosage-display text-dosage-display text-primary mt-space-xs" id="quizStatementDose">-</div>
+            </div>
+            <div class="grid grid-cols-2 gap-space-sm">
+              <button class="py-space-md rounded-xl bg-secondary-container text-on-secondary-container font-label-lg text-label-lg" id="btnTF_Benar">Benar</button>
+              <button class="py-space-md rounded-xl bg-error-container text-on-error-container font-label-lg text-label-lg" id="btnTF_Salah">Salah</button>
+            </div>
+          </div>
+
+          <!-- Isian Bebas (self-check) -->
+          <div class="js-hidden flex flex-col gap-space-md" id="quizFillArea">
+            <div class="p-space-lg rounded-xl bg-surface-container-low text-center">
+              <div class="font-headline-sm text-headline-sm text-on-surface" id="quizFillDrug">-</div>
+            </div>
+            <input class="field-input px-space-md py-space-sm border border-outline-variant rounded-xl bg-surface-container-lowest" id="quizFillInput" placeholder="Ketik dosis yang Anda ingat..." type="text">
+            <button class="bg-primary text-on-primary py-space-sm rounded-xl font-label-lg text-label-lg" id="btnCheckFill">Cek Jawaban</button>
+            <div class="js-hidden flex flex-col gap-space-sm" id="quizFillReveal">
+              <div class="p-space-md rounded-xl bg-secondary-container/30">
+                <span class="font-label-sm text-label-sm uppercase text-on-secondary-container font-bold">Jawaban Benar</span>
+                <div class="font-dosage-display text-dosage-display text-on-surface mt-space-xxs" id="quizFillCorrectAnswer">-</div>
+              </div>
+              <p class="font-body-sm text-body-sm text-on-surface-variant text-center">Apakah jawaban Anda tadi sudah benar?</p>
+              <div class="grid grid-cols-2 gap-space-sm">
+                <button class="py-space-sm rounded-xl bg-secondary-container text-on-secondary-container font-label-lg text-label-lg" id="btnFillCorrect">Ya, Benar</button>
+                <button class="py-space-sm rounded-xl bg-error-container text-on-error-container font-label-lg text-label-lg" id="btnFillWrong">Salah</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="js-hidden flex flex-col items-center text-center gap-space-sm py-space-3xl" id="quizResult">
+          <span class="material-symbols-outlined text-secondary text-[48px]" id="quizResultIcon">military_tech</span>
+          <h3 class="font-headline-md text-headline-md text-on-surface" id="quizScoreText">Skor: 0/0</h3>
+          <p class="font-body-sm text-body-sm text-on-surface-variant max-w-xs hidden" id="quizStagedMessage"></p>
+
+          <!-- Tombol untuk Kuis Cepat biasa (bukan mode Belajar Bertahap) -->
+          <div class="flex gap-space-sm mt-space-xs" id="quizStandardActions">
+            <button class="bg-primary text-on-primary px-space-lg py-space-sm rounded-xl font-label-lg text-label-lg" id="btnQuizAgain">Ulangi Kuis</button>
+            <button class="border border-primary text-primary px-space-lg py-space-sm rounded-xl font-label-lg text-label-lg" data-back="deck">Selesai</button>
+          </div>
+
+          <!-- Tombol untuk mode Belajar Bertahap (5 obat + kuis, gerbang 100%) -->
+          <div class="js-hidden flex flex-col gap-space-sm mt-space-xs w-full max-w-xs" id="quizStagedActions">
+            <button class="js-hidden bg-primary text-on-primary py-space-sm rounded-xl font-label-lg text-label-lg shadow-sm" id="btnStagedNext">Lanjut ke 5 Obat Berikutnya</button>
+            <button class="js-hidden border border-primary text-primary py-space-sm rounded-xl font-label-lg text-label-lg" id="btnStagedRetryQuiz">Ulangi Kuis 5 Obat Ini</button>
+            <button class="js-hidden border border-outline-variant text-on-surface-variant py-space-sm rounded-xl font-label-lg text-label-lg" id="btnStagedReviewAgain">Review Ulang Flashcard Dulu</button>
+            <button class="text-on-surface-variant font-label-md text-label-md py-space-xs" id="btnStagedExit">Keluar ke daftar deck</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= VIEW: STATISTIK ================= -->
+      <section class="view hidden" id="view-stats">
+        <h2 class="font-headline-lg text-headline-lg text-on-surface mb-space-md">Statistik</h2>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-space-sm mb-space-lg" id="statStatusGrid"></div>
+
+        <div class="flex items-center justify-between mb-space-sm">
+          <h3 class="font-headline-md text-headline-md text-on-surface">Riwayat Belajar (14 Hari Terakhir)</h3>
+          <span class="font-body-sm text-body-sm text-on-surface-variant" id="statTotalReviews">0 review</span>
+        </div>
+        <div class="bg-surface-container-low rounded-xl p-space-md mb-space-lg">
+          <div class="flex items-end gap-1 h-24" id="statHistoryBars"></div>
+          <div class="flex justify-between mt-space-xxs" id="statHistoryLabels"></div>
+        </div>
+
+        <h3 class="font-headline-md text-headline-md text-on-surface mb-space-sm">Kartu per Deck</h3>
+        <div class="flex flex-col gap-space-sm max-w-2xl mb-space-lg" id="statDeckBars"></div>
+
+        <h3 class="font-headline-md text-headline-md text-on-surface mb-space-sm">Kartu per Kategori</h3>
+        <div class="flex flex-col gap-space-sm max-w-2xl" id="statCategoryBars"></div>
+      </section>
+
+      <!-- ================= VIEW: KATEGORI ================= -->
+      <section class="view hidden" id="view-kategori">
+        <h2 class="font-headline-lg text-headline-lg text-on-surface mb-space-md">Kategori Obat</h2>
+        <p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">Dikelompokkan otomatis berdasarkan golongan/kelas obat pada tiap kartu.</p>
+        <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-space-sm" id="categoryList"></div>
+      </section>
+
+      <!-- ================= VIEW: DETAIL KATEGORI ================= -->
+      <section class="view hidden" id="view-kategori-detail">
+        <button class="back-btn flex items-center gap-1 text-on-surface-variant font-label-md text-label-md mb-space-sm" data-back-kategori="1">
+          <span class="material-symbols-outlined text-[18px]">arrow_back</span> Kembali
+        </button>
+        <h2 class="font-headline-lg text-headline-lg text-on-surface mb-space-md" id="kategoriTitle">Kategori</h2>
+        <div class="flex gap-space-sm mb-space-md">
+          <button class="flex-1 flex items-center justify-center gap-space-xs bg-primary text-on-primary py-space-sm rounded-xl font-label-lg text-label-lg shadow-sm" id="btnStartStudyFromKategori">
+            <span class="material-symbols-outlined text-[19px]">school</span> Mulai Belajar
+          </button>
+          <button class="flex-1 flex items-center justify-center gap-space-xs border border-primary text-primary py-space-sm rounded-xl font-label-lg text-label-lg" id="btnQuizFromKategori">
+            <span class="material-symbols-outlined text-[19px]">quiz</span> Kuis Cepat
+          </button>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-space-sm" id="cardListInKategori"></div>
+      </section>
+
+      <!-- ================= VIEW: IMPORT DARI FOTO/PDF ================= -->
+      <section class="view hidden max-w-2xl" id="view-import">
+        <h2 class="font-headline-lg text-headline-lg text-on-surface mb-space-xxs">Import dari Foto/PDF</h2>
+        <p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">Unggah foto catatan obat atau file PDF — AI akan membaca dan mengubahnya jadi kartu obat siap disimpan. Anda tetap meninjau hasilnya sebelum disimpan.</p>
+
+        <div class="bg-surface-container-low rounded-xl p-space-md mb-space-md">
+          <label class="block font-label-md text-label-md text-on-surface-variant mb-space-xxs">Gemini API Key</label>
+          <div class="flex gap-space-sm">
+            <input class="field-input flex-1 px-space-sm py-space-xs border border-outline-variant rounded-lg bg-surface-container-lowest" id="geminiKeyInput" placeholder="Tempel API key di sini" type="password">
+            <button class="px-space-md bg-primary text-on-primary rounded-lg font-label-md text-label-md" id="btnSaveGeminiKey">Simpan</button>
+          </div>
+          <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xxs" id="geminiKeyStatus">Belum ada API key tersimpan.</p>
+          <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xxs">Dapatkan API key gratis di <span class="text-primary font-semibold">aistudio.google.com/apikey</span>. Key hanya disimpan di project Apps Script Anda sendiri.</p>
+        </div>
+
+        <div class="bg-surface-container-low rounded-xl p-space-md mb-space-md">
+          <label class="block font-label-md text-label-md text-on-surface-variant mb-space-xxs">Simpan ke Deck</label>
+          <input class="field-input w-full px-space-sm py-space-xs border border-outline-variant rounded-lg bg-surface-container-lowest mb-space-md" id="importDeck" list="deckOptions" placeholder="cth: Obat Anak">
+
+          <label class="block font-label-md text-label-md text-on-surface-variant mb-space-xxs">Pilih Foto atau PDF</label>
+          <input accept="image/*,application/pdf" class="w-full font-body-sm text-body-sm" id="importFile" type="file">
+
+          <button class="mt-space-md w-full bg-primary text-on-primary py-space-sm rounded-xl font-label-lg text-label-lg shadow-sm disabled:opacity-50" id="btnProcessImport">Proses dengan AI</button>
+          <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xxs hidden" id="importLoadingText">Sedang membaca file, mohon tunggu...</p>
+        </div>
+
+        <div class="hidden" id="importResults">
+          <div class="flex items-center justify-between mb-space-sm">
+            <h3 class="font-headline-md text-headline-md text-on-surface">Hasil Ekstraksi</h3>
+            <span class="font-body-sm text-body-sm text-on-surface-variant" id="importResultCount">0 obat ditemukan</span>
+          </div>
+          <p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm">Centang yang ingin disimpan. Anda bisa mengedit nama/dosis sebelum menyimpan.</p>
+          <div class="flex flex-col gap-space-sm mb-space-md" id="importCandidateList"></div>
+          <button class="w-full bg-primary text-on-primary py-space-sm rounded-xl font-label-lg text-label-lg shadow-sm" id="btnSaveImported">Simpan Kartu Terpilih</button>
+        </div>
+      </section>
+
+      <!-- ================= VIEW: PROFIL ================= -->
+      <section class="view hidden max-w-2xl" id="view-profil">
+        <h2 class="font-headline-lg text-headline-lg text-on-surface mb-space-md">Profil</h2>
+        <div class="flex items-center gap-space-md mb-space-lg">
+          <div class="relative shrink-0">
+            <span class="w-16 h-16 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline-md text-headline-md overflow-hidden" id="profileAvatarBig">?</span>
+            <button aria-label="Ganti foto profil" class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-surface-container-lowest border border-outline-variant flex items-center justify-center shadow-sm" id="btnChangePhoto" title="Ganti foto profil" type="button">
+              <span class="material-symbols-outlined text-[14px] text-primary">photo_camera</span>
+            </button>
+          </div>
+          <div>
+            <div class="font-headline-sm text-headline-sm text-on-surface" id="profileDisplayName">Belum ada nama</div>
+            <div class="font-body-sm text-body-sm text-on-surface-variant" id="profileDisplayTitle">Atur nama & gelar Anda di bawah</div>
+          </div>
+        </div>
+
+        <input accept="image/*" class="hidden" id="profilePhotoInput" type="file">
+        <div class="flex items-center gap-space-md mb-space-lg">
+          <button class="font-label-md text-label-md text-primary" id="btnUploadPhotoText" type="button">Ganti Foto</button>
+          <button class="hidden font-label-md text-label-md text-error" id="btnRemovePhoto" type="button">Hapus Foto</button>
+          <span class="hidden font-body-sm text-body-sm text-on-surface-variant" id="photoUploadStatus">Mengunggah...</span>
+        </div>
+
+        <label class="block font-label-md text-label-md text-on-surface-variant mb-space-xxs">Nama Tampilan</label>
+        <input class="field-input w-full px-space-sm py-space-xs border border-outline-variant rounded-lg bg-surface-container-lowest mb-space-md" id="profileNameInput" placeholder="cth: dr. Nadia">
+
+        <label class="block font-label-md text-label-md text-on-surface-variant mb-space-xxs">Gelar / Spesialisasi</label>
+        <input class="field-input w-full px-space-sm py-space-xs border border-outline-variant rounded-lg bg-surface-container-lowest mb-space-md" id="profileTitleInput" placeholder="cth: Dokter Umum, RSUD X">
+
+        <button class="bg-primary text-on-primary px-space-lg py-space-sm rounded-xl font-label-lg text-label-lg shadow-sm" id="btnSaveProfile">Simpan Profil</button>
+
+        <div class="mt-space-2xl pt-space-md border-t border-outline-variant/40">
+          <h3 class="font-headline-md text-headline-md text-on-surface mb-space-xs">Cadangkan / Pindahkan Data</h3>
+          <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed mb-space-md">
+            Semua data tersimpan hanya di perangkat ini. Unduh cadangan secara berkala, atau pakai file cadangan untuk memindahkan data ke HP/laptop lain.
+          </p>
+          <div class="flex flex-wrap gap-space-sm mb-space-xs">
+            <button class="flex items-center gap-space-xs bg-surface-container-high text-on-surface px-space-md py-space-sm rounded-xl font-label-md text-label-md" id="btnExportBackup" type="button">
+              <span class="material-symbols-outlined text-[18px]">download</span> Unduh Cadangan
+            </button>
+            <button class="flex items-center gap-space-xs border border-outline-variant text-on-surface px-space-md py-space-sm rounded-xl font-label-md text-label-md" id="btnImportBackup" type="button">
+              <span class="material-symbols-outlined text-[18px]">upload</span> Pulihkan dari Cadangan
+            </button>
+            <input accept="application/json" class="hidden" id="backupFileInput" type="file">
+          </div>
+          <p class="font-body-sm text-body-sm text-on-surface-variant" id="backupStatus"></p>
+        </div>
+
+        <div class="mt-space-2xl pt-space-md border-t border-outline-variant/40">
+          <h3 class="font-headline-md text-headline-md text-on-surface mb-space-xs">Tentang MedCard</h3>
+          <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            MedCard adalah alat bantu hafalan pribadi untuk obat &amp; dosis yang berjalan sepenuhnya offline — semua data tersimpan lokal di perangkat ini, tidak terkirim ke server mana pun.
+            Aplikasi ini bukan pengganti sumber referensi klinis resmi — selalu verifikasi ulang dosis sebelum diterapkan ke pasien.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================= VIEW: REFERENSI ANAK ================= -->
+      <section class="view hidden max-w-2xl" id="view-referensi">
+        <button class="back-btn flex items-center gap-1 text-on-surface-variant font-label-md text-label-md mb-space-sm" data-back="dashboard">
+          <span class="material-symbols-outlined text-[18px]">arrow_back</span> Kembali
+        </button>
+        <h2 class="font-headline-lg text-headline-lg text-on-surface mb-space-md">Konversi Dosis Anak</h2>
+
+        <div class="bg-surface-container-low rounded-xl p-space-md mb-space-lg">
+          <label class="block font-label-md text-label-md text-on-surface-variant mb-space-xxs">Masukkan Berat Badan (kg)</label>
+          <input class="field-input w-full px-space-sm py-space-xs border border-outline-variant rounded-lg bg-surface-container-lowest" id="calcBB" placeholder="cth: 14" step="0.1" type="number">
+          <div class="js-hidden flex flex-col gap-space-sm mt-space-md" id="calcResult">
+            <div class="bg-secondary-container/30 rounded-lg p-space-sm flex justify-between items-center gap-space-sm">
+              <span class="font-label-sm text-label-sm text-on-secondary-container uppercase font-bold">Puyer 3x1</span>
+              <span class="font-body-md text-body-md font-semibold text-on-surface text-right" id="calcPulvResult">-</span>
+            </div>
+            <div class="bg-tertiary-container/15 rounded-lg p-space-sm flex justify-between items-center gap-space-sm">
+              <span class="font-label-sm text-label-sm text-on-tertiary-fixed-variant uppercase font-bold">Cairan Rumatan</span>
+              <span class="font-body-md text-body-md font-semibold text-on-surface text-right" id="calcCairanResult">-</span>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="font-headline-md text-headline-md text-on-surface mb-space-sm">Tabel Konversi Puyer 3x1</h3>
+        <table class="w-full mb-space-lg border-collapse">
+          <tbody class="divide-y divide-outline-variant/50" id="tablePulvBody"></tbody>
+        </table>
+
+        <h3 class="font-headline-md text-headline-md text-on-surface mb-space-sm">Tabel Cairan Rumatan (Holliday-Segar)</h3>
+        <table class="w-full mb-space-md border-collapse">
+          <tbody class="divide-y divide-outline-variant/50" id="tableCairanBody"></tbody>
+        </table>
+
+        <p class="font-body-sm text-body-sm text-on-surface-variant italic">Tabel ini diinput manual sesuai catatan pribadi Anda — selalu verifikasi ulang dengan sumber/guideline resmi sebelum diterapkan ke pasien.</p>
+      </section>
+
+      <!-- ================= VIEW: SEARCH ================= -->
+      <section class="view hidden" id="view-search">
+        <button class="back-btn flex items-center gap-1 text-on-surface-variant font-label-md text-label-md mb-space-sm lg:hidden" data-back="dashboard">
+          <span class="material-symbols-outlined text-[18px]">arrow_back</span> Kembali
+        </button>
+        <h2 class="font-headline-lg text-headline-lg text-on-surface mb-space-md hidden lg:block">Cari Obat</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-space-sm" id="searchResults"></div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ============ BOTTOM NAV (MOBILE, <1024px) ============ -->
+  <nav class="mobile-only lg:hidden fixed bottom-0 inset-x-0 z-40 bg-surface/95 backdrop-blur-xl border-t border-outline-variant/50 pb-safe">
+    <div class="max-w-content-max-width mx-auto grid grid-cols-5 items-center h-16 px-space-xs">
+      <button class="nav-link flex flex-col items-center justify-center gap-0.5 text-on-surface-variant" data-view="dashboard">
+        <span class="material-symbols-outlined text-[22px]">home</span>
+        <span class="font-label-sm text-label-sm">Beranda</span>
+      </button>
+      <button class="nav-link flex flex-col items-center justify-center gap-0.5 text-on-surface-variant" data-view="referensi">
+        <span class="material-symbols-outlined text-[22px]">child_care</span>
+        <span class="font-label-sm text-label-sm">Referensi</span>
+      </button>
+      <button class="flex items-center justify-center" id="btnFabAdd">
+        <span class="w-13 h-13 flex items-center justify-center rounded-full bg-primary text-on-primary shadow-lg" style="width:52px;height:52px;">
+          <span class="material-symbols-outlined text-[26px]">add</span>
+        </span>
+      </button>
+      <button class="nav-link flex flex-col items-center justify-center gap-0.5 text-on-surface-variant" data-view="stats">
+        <span class="material-symbols-outlined text-[22px]">bar_chart</span>
+        <span class="font-label-sm text-label-sm">Statistik</span>
+      </button>
+      <button class="nav-link flex flex-col items-center justify-center gap-0.5 text-on-surface-variant" data-view="search">
+        <span class="material-symbols-outlined text-[22px]">search</span>
+        <span class="font-label-sm text-label-sm">Cari</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============ LOADING OVERLAY (animasi kapsul loncat-loncat) ============ -->
+  <div class="js-hidden fixed inset-0 z-[100] flex flex-col items-center justify-center gap-space-md bg-surface/85 backdrop-blur-sm" id="loadingOverlay">
+    <div class="flex items-end gap-2 h-10" aria-hidden="true">
+      <span class="loader-pill" style="animation-delay:0s"></span>
+      <span class="loader-pill" style="animation-delay:0.12s"></span>
+      <span class="loader-pill" style="animation-delay:0.24s"></span>
+      <span class="loader-pill" style="animation-delay:0.36s"></span>
+    </div>
+    <span class="font-label-md text-label-md text-on-surface-variant" id="loadingOverlayText">Memuat...</span>
+  </div>
+
+  <div class="hidden fixed bottom-24 lg:bottom-6 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface px-space-md py-space-xs rounded-full font-label-md text-label-md shadow-lg z-50 max-w-[90%] text-center" id="toast"></div>
+
+  <script src="dexie.min.js"></script>
+  <script src="db.js"></script>
+  <script src="gs-shim.js"></script>
+  <script src="sounds.js"></script>
+  <script src="app.js"></script>
+  <script src="offline-extras.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('service-worker.js').catch(function (err) {
+          console.warn('Service worker gagal didaftarkan:', err);
+        });
+      });
+    }
+  </script>
+</body>
+</html>

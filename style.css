@@ -1,0 +1,232 @@
+:root{
+    --c-background: 247 250 249;
+    --c-error: 186 26 26;
+    --c-error-container: 255 218 214;
+    --c-inverse-on-surface: 238 241 240;
+    --c-inverse-primary: 122 214 211;
+    --c-inverse-surface: 45 49 49;
+    --c-on-background: 24 28 28;
+    --c-on-error: 255 255 255;
+    --c-on-error-container: 147 0 10;
+    --c-on-primary: 255 255 255;
+    --c-on-primary-container: 171 255 252;
+    --c-on-primary-fixed: 0 32 31;
+    --c-on-primary-fixed-variant: 0 80 78;
+    --c-on-secondary: 255 255 255;
+    --c-on-secondary-container: 0 111 99;
+    --c-on-secondary-fixed: 0 32 28;
+    --c-on-secondary-fixed-variant: 0 80 71;
+    --c-on-surface: 24 28 28;
+    --c-on-surface-variant: 62 73 72;
+    --c-on-tertiary: 255 255 255;
+    --c-on-tertiary-container: 232 241 255;
+    --c-on-tertiary-fixed: 15 28 44;
+    --c-on-tertiary-fixed-variant: 58 72 89;
+    --c-outline: 110 121 120;
+    --c-outline-variant: 189 201 200;
+    --c-primary: 0 95 94;
+    --c-primary-container: 0 122 120;
+    --c-primary-fixed: 151 242 239;
+    --c-primary-fixed-dim: 122 214 211;
+    --c-secondary: 0 107 95;
+    --c-secondary-container: 118 244 224;
+    --c-secondary-fixed: 121 247 227;
+    --c-secondary-fixed-dim: 89 219 199;
+    --c-surface: 247 250 249;
+    --c-surface-bright: 247 250 249;
+    --c-surface-container: 235 238 237;
+    --c-surface-container-high: 230 233 232;
+    --c-surface-container-highest: 224 227 226;
+    --c-surface-container-low: 241 244 243;
+    --c-surface-container-lowest: 255 255 255;
+    --c-surface-dim: 215 219 218;
+    --c-surface-tint: 0 106 104;
+    --c-surface-variant: 224 227 226;
+    --c-tertiary: 72 86 103;
+    --c-tertiary-container: 97 110 128;
+    --c-tertiary-fixed: 214 228 249;
+    --c-tertiary-fixed-dim: 186 200 220;
+  }
+
+  /* Tema gelap — diambil dari palet versi desktop Stitch Anda */
+  .dark{
+    --c-background: 11 19 38;
+    --c-error: 255 180 171;
+    --c-error-container: 147 0 10;
+    --c-inverse-on-surface: 40 48 68;
+    --c-inverse-primary: 0 106 97;
+    --c-inverse-surface: 218 226 253;
+    --c-on-background: 218 226 253;
+    --c-on-error: 105 0 5;
+    --c-on-error-container: 255 218 214;
+    --c-on-primary: 0 55 50;
+    --c-on-primary-container: 0 48 43;
+    --c-on-primary-fixed: 0 32 29;
+    --c-on-primary-fixed-variant: 0 80 73;
+    --c-on-secondary: 0 55 51;
+    --c-on-secondary-container: 154 240 229;
+    --c-on-secondary-fixed: 0 32 29;
+    --c-on-secondary-fixed-variant: 0 80 74;
+    --c-on-surface: 218 226 253;
+    --c-on-surface-variant: 188 201 198;
+    --c-on-tertiary: 13 54 53;
+    --c-on-tertiary-container: 4 47 46;
+    --c-on-tertiary-fixed: 0 32 31;
+    --c-on-tertiary-fixed-variant: 39 77 76;
+    --c-outline: 135 147 145;
+    --c-outline-variant: 61 73 71;
+    --c-primary: 107 216 203;
+    --c-primary-container: 41 161 149;
+    --c-primary-fixed: 137 245 231;
+    --c-primary-fixed-dim: 107 216 203;
+    --c-secondary: 128 213 203;
+    --c-secondary-container: 0 112 104;
+    --c-secondary-fixed: 156 242 232;
+    --c-secondary-fixed-dim: 128 213 203;
+    --c-surface: 11 19 38;
+    --c-surface-bright: 49 57 77;
+    --c-surface-container: 23 31 51;
+    --c-surface-container-high: 34 42 61;
+    --c-surface-container-highest: 45 52 73;
+    --c-surface-container-low: 19 27 46;
+    --c-surface-container-lowest: 6 14 32;
+    --c-surface-dim: 11 19 38;
+    --c-surface-tint: 107 216 203;
+    --c-surface-variant: 45 52 73;
+    --c-tertiary: 167 206 204;
+    --c-tertiary-container: 114 152 150;
+    --c-tertiary-fixed: 194 234 232;
+    --c-tertiary-fixed-dim: 167 206 204;
+  }
+
+  html, body{ width:100%; min-height:100%; margin:0; padding:0; }
+  body{
+    overscroll-behavior-y:none;
+    -webkit-tap-highlight-color:transparent;
+    transition:background-color .25s ease, color .25s ease;
+  }
+  .pb-safe{ padding-bottom:env(safe-area-inset-bottom, 0px); }
+  .pt-safe{ padding-top:env(safe-area-inset-top, 0px); }
+  ::-webkit-scrollbar{ width:0; height:0; display:none; }
+  * { scrollbar-width:none; }
+
+  /* ---------- FLASHCARD 3D FLIP ---------- */
+  .flip-scene{ perspective:1600px; }
+  .flip-card{
+    position:relative; width:100%; min-height:440px;
+    transform-style:preserve-3d;
+    transition:transform .55s cubic-bezier(.4,.2,.2,1);
+  }
+  .flip-card.is-flipped{ transform:rotateY(180deg); }
+  .flip-face{
+    position:absolute; inset:0;
+    backface-visibility:hidden; -webkit-backface-visibility:hidden;
+    overflow-y:auto;
+  }
+  .flip-face-back{ transform:rotateY(180deg); }
+
+  /* ---------- Sidebar aktif indikator ---------- */
+  .nav-link.is-active{
+    background-color: rgb(var(--c-surface-container-high));
+    color: rgb(var(--c-primary));
+    font-weight:600;
+  }
+
+  /* ---------- Chip toggle (rute pemberian) ---------- */
+  .chip-toggle.is-active{
+    background-color: rgb(var(--c-primary));
+    border-color: rgb(var(--c-primary));
+    color: rgb(var(--c-on-primary));
+  }
+
+  /* ---------- Status dot ---------- */
+  .dot-New{ background-color: rgb(var(--c-outline)); }
+  .dot-Learning{ background-color:#E07A5F; }
+  .dot-Review{ background-color: rgb(var(--c-primary)); }
+  .dot-Mastered{ background-color: rgb(var(--c-secondary)); }
+
+  /* ---------- Quiz option feedback ---------- */
+  .quiz-opt.is-correct{
+    background-color: rgb(var(--c-secondary-container) / 0.35);
+    border-color: rgb(var(--c-secondary));
+    color: rgb(var(--c-on-secondary-container));
+  }
+  .quiz-opt.is-wrong{
+    background-color: rgb(var(--c-error-container) / 0.6);
+    border-color: rgb(var(--c-error));
+    color: rgb(var(--c-on-error-container));
+  }
+
+  input:focus, textarea:focus, select:focus{ outline:none; }
+
+  /* ---------- LOADING OVERLAY: kapsul loncat-loncat ---------- */
+  .loader-pill{
+    width: 12px; height: 32px; border-radius: 999px;
+    background: linear-gradient(180deg, rgb(var(--c-primary)), rgb(var(--c-secondary)));
+    animation: pill-bounce 0.85s cubic-bezier(.45,0,.55,1) infinite;
+    transform-origin: bottom center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+  }
+  @keyframes pill-bounce{
+    0%, 100% { transform: translateY(0) scaleY(1) rotate(0deg); }
+    25%      { transform: translateY(-16px) scaleY(1.12) rotate(-8deg); }
+    50%      { transform: translateY(0) scaleY(0.82) rotate(0deg); }
+    75%      { transform: translateY(-4px) scaleY(1.04) rotate(6deg); }
+  }
+  #loadingOverlay{ transition: opacity 0.18s ease; }
+
+  /* ---------- TRANSISI ANTAR-VIEW ---------- */
+  @keyframes viewFadeIn{
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .view:not(.hidden){
+    animation: viewFadeIn 0.32s cubic-bezier(.25,.8,.35,1);
+  }
+
+  /* ---------- REVEAL SRS DOCK & AREA KUIS ---------- */
+  @keyframes slideUpFadeIn{
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  #srsDock:not(.js-hidden){ animation: slideUpFadeIn 0.3s cubic-bezier(.25,.8,.35,1); }
+  #quizOptions:not(.js-hidden),
+  #quizTrueFalseArea:not(.js-hidden),
+  #quizFillArea:not(.js-hidden){ animation: slideUpFadeIn 0.3s cubic-bezier(.25,.8,.35,1); }
+
+  /* ---------- KARTU & TOMBOL: transisi halus umum ---------- */
+  button, .chip-toggle, .nav-link{
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease, opacity 0.2s ease;
+  }
+
+  /* ---------- TOAST ---------- */
+  @keyframes toastIn{
+    from { opacity: 0; transform: translate(-50%, 10px); }
+    to   { opacity: 1; transform: translate(-50%, 0); }
+  }
+  #toast{ left: 50%; }
+  #toast:not(.hidden){
+    animation: toastIn 0.25s cubic-bezier(.25,.8,.35,1);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .loader-pill, .view:not(.hidden), #srsDock:not(.js-hidden),
+    #quizOptions:not(.js-hidden), #quizTrueFalseArea:not(.js-hidden), #quizFillArea:not(.js-hidden),
+    #toast:not(.hidden){
+      animation: none !important;
+    }
+    button, .chip-toggle, .nav-link{ transition: none !important; }
+  }
+
+  /* Untuk elemen yang class tampilnya (flex/grid) di-set permanen di HTML dan
+     hanya perlu ditoggle show/hide lewat JS — pakai .js-hidden, BUKAN .hidden
+     bawaan Tailwind (supaya tidak bentrok dengan util responsif seperti
+     "hidden lg:flex" pada sidebar). */
+  .js-hidden{ display:none !important; }
+
+  @media (max-width: 1023px){
+    .desktop-only{ display:none !important; }
+  }
+  @media (min-width: 1024px){
+    .mobile-only{ display:none !important; }
+  }
