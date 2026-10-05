@@ -1,10 +1,12 @@
 {
+  "id": "./index.html",
   "name": "MedCard — Flashcard Obat & Dosis",
   "short_name": "MedCard",
   "description": "Alat bantu hafalan pribadi untuk obat dan dosisnya, dengan spaced repetition dan kuis bertahap. Berjalan sepenuhnya offline.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
+  "categories": ["education", "medical", "productivity"],
   "orientation": "portrait-primary",
   "background_color": "#F7FAF9",
   "theme_color": "#005F5E",
